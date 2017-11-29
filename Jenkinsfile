@@ -8,12 +8,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                bash 'npm install' 
+                sh 'npm install' 
             }
         }
 	stage('Test') { 
             steps {
-                bash 'npm run test' 
+                sh 'npm run test' 
             }
         }
 
