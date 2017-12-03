@@ -26,13 +26,12 @@ pipeline {
             }
         }
         stage('Deploy') {
-            if (env.BRANCH_NAME == 'master') {
-                steps {
-                    echo 'Deploying master branch'
-                    sh 'npm run build'   
-                }
-            } else {
-                echo 'There is no need to deploy'
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploying master branch'
+                sh 'npm run build'   
             }
         }
     }
