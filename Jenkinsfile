@@ -24,12 +24,11 @@ pipeline {
                 echo 'Listing folders:'
                 sh 'pwd'
                 sh 'ls -la .'
-                git branch
             }
         }
         stage('Deploy') {
             when {
-                branch 'master'
+                branch 'refs/heads/master'
             }
             steps {
                 echo 'Deploying master branch'
