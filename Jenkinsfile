@@ -22,7 +22,8 @@ pipeline {
         stage('Listing') {
             steps {
                 echo 'Listing folders:'
-                ls '.'
+                fileExists 'jenkins'
+                pwd
             }
         }
         stage('Deploy') {
