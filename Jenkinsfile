@@ -24,6 +24,7 @@ pipeline {
                 echo 'Listing folders:'
                 sh 'pwd'
                 sh 'ls -la .'
+                sh 'git branch'
             }
         }
         stage('Deploy') {
