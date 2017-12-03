@@ -21,8 +21,8 @@ pipeline {
         }
         stage('Listing') {
             steps {
-                echo "Listing folders:"
-                ls ./
+                echo 'Listing folders:'
+                ls '.'
             }
         }
         stage('Deploy') {
