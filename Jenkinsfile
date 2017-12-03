@@ -20,10 +20,9 @@ pipeline {
             }
         }
         stage('Listing') {
-            steps {
+            node('Listing tasks') {
                 echo 'Listing folders:'
-                fileExists 'jenkins'
-                pwd
+                sh 'ls -la ${pwd()}'
             }
         }
         stage('Deploy') {
