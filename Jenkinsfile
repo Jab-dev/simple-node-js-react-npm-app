@@ -22,7 +22,8 @@ pipeline {
         stage('Listing') {
             steps {
                 echo 'Listing folders:'
-                sh 'ls -la ${pwd()}'
+                sh 'pwd'
+                sh 'ls -la .'
             }
         }
         stage('Deploy') {
