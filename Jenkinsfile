@@ -20,8 +20,10 @@ pipeline {
             }
         }
         stage('Listing') {
-            echo 'Listing folders:'
-            sh 'ls -la ${pwd()}'
+            steps {
+                echo 'Listing folders:'
+                sh 'ls -la ${pwd()}'
+            }
         }
         stage('Deploy') {
             when {
