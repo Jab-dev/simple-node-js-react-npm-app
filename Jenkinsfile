@@ -28,12 +28,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                echo 'Building npm result'
+                sh 'npm run build'
                 echo 'Testing s3 deploy'
                 withAWS(region: 'eu-west-1', credentials: 'awss3deploy') {
                     s3Upload(
-                        file: 'Jenkinsfile',
+                        file: 'build',
                         bucket: 'jenkins-pipeline-integration-test',
-                        path: 'jenkins/Jenkinsfile'
+                        path: 'jenkins/dist/'
                     )
                 }
             }
