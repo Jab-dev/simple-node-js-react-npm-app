@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Testing s3 deploy'
-                withAWS(region: '', profile: 'AKIAIJGYIDZPEIODGTHQ') {
+                withAWS(region: '', credentials: 'awss3upload') {
                     s3Upload(
                         file: 'Jenkinsfile',
                         bucket: 'jenkins-pipeline-integration-test',
