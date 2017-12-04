@@ -35,7 +35,7 @@ pipeline {
                     s3Upload(
                         file: 'build',
                         bucket: 'jenkins-pipeline-integration-test',
-                        path: 'jenkins/dist/'
+                        path: ''
                     )
                 }
             }
