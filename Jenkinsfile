@@ -29,9 +29,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Testing s3 deploy'
-                s3Upload {
-                    file 'Jenkinsfile'
-                    bucket 'jenkins-pipeline-integration-test'
+                withAWS(region: '', profile: 'Jenkins-bot') {
+                    // Upload a file/folder from the workspace to an S3 bucket
+                    s3Upload(
+                        file: "Jenkinsfile",
+                        bucket: 'jenkins-pipeline-integration-test'
+                    )
                 }
             }
         }
