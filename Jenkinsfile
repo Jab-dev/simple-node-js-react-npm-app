@@ -34,6 +34,8 @@ pipeline {
                         echo 'I only execute on the master branch'
                     } else {
                         echo 'I execute elsewhere'
+                        echo env.BRANCH_NAME
+                        echo '${env.BRANCH_NAME}'
                     }
                 }                
             }
