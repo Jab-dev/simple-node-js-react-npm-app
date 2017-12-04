@@ -29,12 +29,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Testing s3 deploy'
-                awsIdentity()
-                s3Upload(
-                    file: 'Jenkinsfile',
-                    bucket: 'jenkins-pipeline-integration-test',
-                    path: 'jenkins/'
-                )
+                withAWS(region: '', profile: 'Jenkins-bot') {
+                    s3Upload(
+                        file: 'Jenkinsfile',
+                        bucket: 'jenkins-pipeline-integration-test',
+                        path: 'jenkins/'
+                    )
+                }
             }
         }
     }
