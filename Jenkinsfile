@@ -31,8 +31,8 @@ pipeline {
                 echo 'Testing s3 deploy'
                 s3Upload(
                     file: 'Jenkinsfile',
-                    bucket: 'jenkins-pipeline-integration-test'
-                    path: 'jenkins'
+                    bucket: 'jenkins-pipeline-integration-test',
+                    path: 'jenkins/'
                 )
             }
         }
