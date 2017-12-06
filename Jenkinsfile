@@ -19,22 +19,23 @@ pipeline {
                 sh './jenkins/scripts/test.sh' 
             }
         }
-        stage('Listing') {
-            steps {
-                echo 'Listing folders:'
-                sh 'pwd'
-                sh 'ls -la .'
-            }
-        }
         stage('Deploy') {
             steps {
                 script {
-                    echo 'Probando valor'
-                    echo env.BRANCH_NAME
                     if (env.BRANCH_NAME == 'master') {
-                        echo 'I only execute on the master branch'
+                        echo 'There is master branch, deploying result'
+                        echo 'Building proyect'
+                        npm run build
+                        echo 'Testing s3 deploy'
+                        withAWS(region: 'eu-west-1', credentials: 'awss3deploy') {
+                            s3Upload(
+                                file: 'build',
+                                bucket: 'jenkins-pipeline-integration-test',
+                                path: ''
+                            )
+                        }
                     } else {
-                        echo 'I execute elsewhere'
+                        echo 'Is not master branch, no need to deploy'
                     }
                 }
             }
