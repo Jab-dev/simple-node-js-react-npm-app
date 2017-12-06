@@ -25,7 +25,7 @@ pipeline {
                     if (env.BRANCH_NAME == 'master') {
                         echo 'There is master branch, deploying result'
                         echo 'Building proyect'
-                        npm run build
+                        sh 'npm run build'
                         echo 'Testing s3 deploy'
                         withAWS(region: 'eu-west-1', credentials: 'awss3deploy') {
                             s3Upload(
