@@ -25,14 +25,21 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "Deploying branch ${env.BRANCH_NAME}"
-                sh 'npm run build'
-                withAWS(region: 'eu-west-1', credentials: 'awss3deploy') {
-                    s3Upload(
-                        file: 'build',
-                        bucket: 'jenkins-pipeline-integration-test',
-                        path: "${env.BRANCH_NAME}"
-                    )
+                script {
+                    if (env.BRANCH_NAME == 'master') {
+                        echo 'There is master branch, deploying result'
+                        echo 'Building proyect'
+                        sh 'npm run build'
+                        withAWS(region: 'eu-west-1', credentials: 'awss3deploy') {
+                            s3Upload(
+                                file: 'build',
+                                bucket: 'jenkins-pipeline-integration-test',
+                                path: ''
+                            )
+                        }
+                    } else {
+                        echo 'Is not master branch, no need to deploy'
+                    }
                 }
             }
         }
