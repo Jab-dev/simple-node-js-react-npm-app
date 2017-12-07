@@ -6,9 +6,11 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                echo 'Initializing...'
-                def node = tool name: 'Node-8.9.2', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-                env.PATH = "${node}/bin:${env.PATH}"
+                script {
+                    echo 'Initializing...'
+                    def node = tool name: 'Node-8.9.2', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+                    env.PATH = "${node}/bin:${env.PATH}"
+                }
             }
         }
         stage('Build') { 
